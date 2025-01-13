@@ -13,9 +13,11 @@ Config.set('graphics', 'height', 500)
 
 class CalculatorApp(App):
     def update_label(self):
+        """Refreshes the window with numbers / Обновляет окно с цифрами"""
         self.lbl.text = self.formula
 
     def add_number(self, instance):
+        """Entering numbers on the scoreboard / Ввод чисел на табло"""
         if self.formula == '0':
             self.formula = ''
 
@@ -23,6 +25,8 @@ class CalculatorApp(App):
         self.update_label()
 
     def add_operation(self, instance):
+        """Adding operations to the scoreboard / Добавление операций на табло
+        Special conditions for mul and div symbols / Спец условия для символов умн и дел"""
         if (str(instance.text)).lower() == '×':
             self.formula += '*'
         elif (str(instance.text)).lower() == '÷':
@@ -32,6 +36,8 @@ class CalculatorApp(App):
         self.update_label()
 
     def calc_result(self, instance):
+        """Output of the result / Вывод результата
+        The eval() function is used / Используется функция eval()"""
         self.lbl.text = str(eval(self.lbl.text))
         self.formula = "0"
 
