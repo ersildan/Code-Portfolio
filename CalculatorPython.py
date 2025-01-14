@@ -42,23 +42,28 @@ class CalculatorApp(App):
         self.formula = "0"
 
     def calc_ce(self, instance):
+        """Full reset on the screen / Полный сброс на экране."""
         self.formula = '0'
         self.update_label()
 
     def calc_back(self, instance):
+        """Character-by-character deletion / Посимвольное удаление"""
         self.formula = str(self.formula)[:-1]
         if self.formula == '':
             self.formula = '0'
         self.update_label()
 
     def calc_square(self, instance):
+        """A function that extracts the square root / Функция, которая извлекает квадратный корень"""
         self.lbl.text = str(eval(self.lbl.text + '**(0.5)'))
         self.formula = "0"
 
     def calc_exit(self, instance):
+        """Exit and stop the program / выход из программы"""
         self.stop()
 
     def build(self):
+        """Building calculator buttons / Построение кнопок калькулятора"""
         self.formula = '0'
         b1 = BoxLayout(orientation='vertical', padding=5)
         g1 = GridLayout(cols=4, spacing=1, size_hint=(1, .6))
