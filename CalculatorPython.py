@@ -38,8 +38,12 @@ class CalculatorApp(App):
     def calc_result(self, instance):
         """Output of the result / Вывод результата
         The eval() function is used / Используется функция eval()"""
-        self.lbl.text = str(eval(self.lbl.text))
-        self.formula = "0"
+        try:
+            self.lbl.text = str(eval(self.lbl.text))
+            self.formula = "0"
+        except ZeroDivisionError:
+            self.lbl.text = '÷ на 0 нельзя'
+
 
     def calc_ce(self, instance):
         """Full reset on the screen / Полный сброс на экране."""
