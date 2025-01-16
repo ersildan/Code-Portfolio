@@ -43,6 +43,9 @@ class CalculatorApp(App):
             self.formula = "0"
         except ZeroDivisionError:
             self.lbl.text = '÷ на 0 нельзя'
+        except Exception: # Catching all the errors / Ловим все ошибки
+            self.lbl.text = 'Ошибка, повторить ввод'
+            self.formula = "0"
 
 
     def calc_ce(self, instance):
