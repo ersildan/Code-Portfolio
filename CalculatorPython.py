@@ -43,8 +43,9 @@ class CalculatorApp(App):
             self.formula = "0"
         except ZeroDivisionError:
             self.lbl.text = '÷ на 0 нельзя'
+            self.formula = "0"
         except Exception: # Catching all the errors / Ловим все ошибки
-            self.lbl.text = 'Ошибка, повторить ввод'
+            self.lbl.text = 'Ошибка, повторите ввод'
             self.formula = "0"
 
 
@@ -63,7 +64,6 @@ class CalculatorApp(App):
     def calc_square(self, instance):
         """A function that extracts the square root / Функция, которая извлекает квадратный корень"""
         self.lbl.text = str(eval(self.lbl.text + '**(0.5)'))
-        self.formula = "0"
 
     def calc_exit(self, instance):
         """Exit and stop the program / выход из программы"""
