@@ -42,10 +42,10 @@ class CalculatorApp(App):
             self.lbl.text = str(eval(self.lbl.text))
             self.formula = "0"
         except ZeroDivisionError:
-            self.lbl.text = '÷ на 0 нельзя'
+            self.lbl.text = 'Делить на 0 нельзя'
             self.formula = "0"
         except Exception: # Catching all the errors / Ловим все ошибки
-            self.lbl.text = 'Ошибка, повторите ввод'
+            self.lbl.text = 'Ошибка ввода'
             self.formula = "0"
 
 
