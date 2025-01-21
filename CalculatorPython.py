@@ -63,7 +63,11 @@ class CalculatorApp(App):
 
     def calc_square(self, instance):
         """A function that extracts the square root / Функция, которая извлекает квадратный корень"""
-        self.lbl.text = str(eval(self.lbl.text + '**(0.5)'))
+        try:
+            self.lbl.text = str(eval(self.lbl.text + '**(0.5)'))
+        except Exception:
+            self.lbl.text = 'Ошибка ввода'
+            self.formula = "0"
 
     def calc_exit(self, instance):
         """Exit and stop the program / выход из программы"""
