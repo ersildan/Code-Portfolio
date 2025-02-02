@@ -1,3 +1,4 @@
+import re
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -6,10 +7,20 @@ from kivy.uix.boxlayout import BoxLayout
 
 
 from kivy.config import Config
-Config.set('graphics', 'resezable', 0)
+Config.set('graphics', 'resizable', 0)
 Config.set('graphics', 'width', 320)
 Config.set('graphics', 'height', 500)
 
+
+def safe_eval(expression):
+    """ Secure calculation of a mathematical expression
+        Безопасное вычисление математического выражения """
+    if not re.match(r'^[0-9+\-*/(). ]+$', expression):
+        return "Ошибка"
+    try:
+        return eval(expression)
+    except ZeroDivisionError:
+        return 'Делить на 0 нельзя'
 
 class CalculatorApp(App):
     def update_label(self):
@@ -38,16 +49,9 @@ class CalculatorApp(App):
     def calc_result(self, instance):
         """Output of the result / Вывод результата
         The eval() function is used / Используется функция eval()"""
-        try:
-            self.lbl.text = str(eval(self.lbl.text))
-            self.formula = "0"
-        except ZeroDivisionError:
-            self.lbl.text = 'Делить на 0 нельзя'
-            self.formula = "0"
-        except Exception: # Catching all the errors / Ловим все ошибки
-            self.lbl.text = 'Ошибка ввода'
-            self.formula = "0"
 
+        self.lbl.text = str(safe_eval(self.lbl.text))
+        self.formula = "0"
 
     def calc_ce(self, instance):
         """Full reset on the screen / Полный сброс на экране."""
