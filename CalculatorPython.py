@@ -22,6 +22,8 @@ def safe_eval(expression):
         return eval(expression)
     except ZeroDivisionError:
         return 'Делить на 0 нельзя'
+    except SyntaxError:
+        return 'Ошибка ввода'
 
 class CalculatorApp(App):
     def update_label(self):
@@ -37,13 +39,17 @@ class CalculatorApp(App):
         self.update_label()
 
     def add_operation(self, instance):
-        """ Check for duplicate operators / Проверка на дублирование операторов."""
+        # Check for duplicate operators / Проверка на дублирование операторов
         last_char = self.formula[-1]
         if last_char in "+-*/":
+            return
+        # Prohibition of two dots in one number / Запрет на две точки в одном числе
+        if instance.text == "." and "." in self.formula.split(" ")[-1]:
             return
 
         """ Adding operations to the scoreboard / Добавление операций на табло
             Special conditions for mul and div symbols / Спец условия для символов умн и дел"""
+
         if (str(instance.text)).lower() == '×':
             self.formula += '*'
         elif (str(instance.text)).lower() == '÷':
@@ -58,7 +64,7 @@ class CalculatorApp(App):
 
         result = str(safe_eval(self.lbl.text))
         self.lbl.text = str(result)
-        self.formula = str(result)
+        self.formula = str(result) if result != "Ошибка" else "0"
 
     def calc_ce(self, instance):
         """Full reset on the screen / Полный сброс на экране."""
@@ -94,34 +100,34 @@ class CalculatorApp(App):
         b1 = BoxLayout(orientation='vertical', padding=5)
         g1 = GridLayout(cols=4, spacing=1, size_hint=(1, .6))
 
-        self.lbl = Label(text="0", font_size=40, halign='right', valign='center',
+        self.lbl = Label(text="0", font_size=42, halign='right', valign='center',
                          size_hint=(1, .4), text_size=(330 - 50, 500 * .4 - 50))
         b1.add_widget(self.lbl)
 
-        g1.add_widget(Button(text="√", font_size=20, on_press=self.calc_square))
-        g1.add_widget(Button(text="CE", font_size=20, on_press=self.calc_ce))
-        g1.add_widget(Button(text="<-", font_size=20, on_press=self.calc_back))
-        g1.add_widget(Button(text="÷", font_size=20, on_press=self.add_operation))
+        g1.add_widget(Button(text="√", font_size=22, on_press=self.calc_square))
+        g1.add_widget(Button(text="CE", font_size=22, on_press=self.calc_ce))
+        g1.add_widget(Button(text="<-", font_size=22, on_press=self.calc_back))
+        g1.add_widget(Button(text="÷", font_size=22, on_press=self.add_operation))
 
-        g1.add_widget(Button(text="7", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="8", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="9", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="×", font_size=20, on_press=self.add_operation))
+        g1.add_widget(Button(text="7", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="8", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="9", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="×", font_size=22, on_press=self.add_operation))
 
-        g1.add_widget(Button(text="4", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="5", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="6", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="-", font_size=20, on_press=self.add_operation))
+        g1.add_widget(Button(text="4", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="5", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="6", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="-", font_size=22, on_press=self.add_operation))
 
-        g1.add_widget(Button(text="1", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="2", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="3", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text="+", font_size=20, on_press=self.add_operation))
+        g1.add_widget(Button(text="1", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="2", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="3", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text="+", font_size=22, on_press=self.add_operation))
 
-        g1.add_widget(Button(text='off', font_size=20, on_press=self.calc_exit))
-        g1.add_widget(Button(text="0", font_size=20, on_press=self.add_number))
-        g1.add_widget(Button(text=".", font_size=20, on_press=self.add_operation))
-        g1.add_widget(Button(text="=", font_size=20, on_press=self.calc_result))
+        g1.add_widget(Button(text='off', font_size=22, on_press=self.calc_exit, background_color=(1, 0.6, 0.2, 1)))
+        g1.add_widget(Button(text="0", font_size=22, on_press=self.add_number))
+        g1.add_widget(Button(text=".", font_size=22, on_press=self.add_operation))
+        g1.add_widget(Button(text="=", font_size=22, on_press=self.calc_result, background_color=(0, 0.7, 1, 1)))
 
         b1.add_widget(g1)
         return b1
