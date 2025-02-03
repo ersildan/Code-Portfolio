@@ -1,4 +1,5 @@
 import re
+import math
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -36,8 +37,13 @@ class CalculatorApp(App):
         self.update_label()
 
     def add_operation(self, instance):
-        """Adding operations to the scoreboard / Добавление операций на табло
-        Special conditions for mul and div symbols / Спец условия для символов умн и дел"""
+        """ Check for duplicate operators / Проверка на дублирование операторов."""
+        last_char = self.formula[-1]
+        if last_char in "+-*/":
+            return
+
+        """ Adding operations to the scoreboard / Добавление операций на табло
+            Special conditions for mul and div symbols / Спец условия для символов умн и дел"""
         if (str(instance.text)).lower() == '×':
             self.formula += '*'
         elif (str(instance.text)).lower() == '÷':
@@ -50,8 +56,9 @@ class CalculatorApp(App):
         """Output of the result / Вывод результата
         The eval() function is used / Используется функция eval()"""
 
-        self.lbl.text = str(safe_eval(self.lbl.text))
-        self.formula = "0"
+        result = str(safe_eval(self.lbl.text))
+        self.lbl.text = str(result)
+        self.formula = str(result)
 
     def calc_ce(self, instance):
         """Full reset on the screen / Полный сброс на экране."""
@@ -66,12 +73,16 @@ class CalculatorApp(App):
         self.update_label()
 
     def calc_square(self, instance):
-        """A function that extracts the square root / Функция, которая извлекает квадратный корень"""
+        """Extracting the square root / Извлечение квадратного корня"""
         try:
-            self.lbl.text = str(eval(self.lbl.text + '**(0.5)'))
-        except Exception:
-            self.lbl.text = 'Ошибка ввода'
-            self.formula = "0"
+            number = float(self.lbl.text)
+            if number < 0:
+                self.lbl.text = 'Ошибка ввода'
+            else:
+                self.lbl.text = str(math.sqrt(number))
+
+        except ValueError:
+            self.lbl.text = 'Ошибка'
 
     def calc_exit(self, instance):
         """Exit and stop the program / выход из программы"""
