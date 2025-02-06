@@ -13,19 +13,19 @@ Config.set('graphics', 'width', 320)
 Config.set('graphics', 'height', 500)
 
 
-def safe_eval(expression):
-    """ Secure calculation of a mathematical expression
-        Безопасное вычисление математического выражения """
-    if not re.match(r'^[0-9+\-*/(). ]+$', expression):
-        return "Ошибка"
-    try:
-        return eval(expression)
-    except ZeroDivisionError:
-        return 'Делить на 0 нельзя'
-    except SyntaxError:
-        return 'Ошибка ввода'
-
 class CalculatorApp(App):
+    def safe_eval(self, expression):
+        """ Secure calculation of a mathematical expression
+            Безопасное вычисление математического выражения """
+        if not re.match(r'^[0-9+\-*/(). ]+$', expression):
+            return "Ошибка"
+        try:
+            return eval(expression)
+        except ZeroDivisionError:
+            return 'Делить на 0 нельзя'
+        except SyntaxError:
+            return 'Ошибка ввода'
+
     def update_label(self):
         """Refreshes the window with numbers / Обновляет окно с цифрами"""
         self.lbl.text = self.formula
@@ -62,9 +62,9 @@ class CalculatorApp(App):
         """Output of the result / Вывод результата
         The eval() function is used / Используется функция eval()"""
 
-        result = str(safe_eval(self.lbl.text))
+        result = str(self.safe_eval(self.lbl.text))
         self.lbl.text = str(result)
-        self.formula = str(result) if result != "Ошибка" else "0"
+        self.formula = str(result) if False != all(result != i for i in ("Ошибка", "Делить на 0 нельзя", "Ошибка ввода")) else "0"
 
     def calc_ce(self, instance):
         """Full reset on the screen / Полный сброс на экране."""
@@ -84,11 +84,13 @@ class CalculatorApp(App):
             number = float(self.lbl.text)
             if number < 0:
                 self.lbl.text = 'Ошибка ввода'
+                self.formula = '0'
             else:
                 self.lbl.text = str(math.sqrt(number))
 
         except ValueError:
             self.lbl.text = 'Ошибка'
+            self.formula = '0'
 
     def calc_exit(self, instance):
         """Exit and stop the program / выход из программы"""
@@ -131,7 +133,6 @@ class CalculatorApp(App):
 
         b1.add_widget(g1)
         return b1
-
 
 if __name__ == "__main__":
     CalculatorApp().run()
