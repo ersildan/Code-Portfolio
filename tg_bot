@@ -145,7 +145,7 @@ def save_message(username, message):
 
 # Запуск бота
 if __name__ == "__main__":
-    app = ApplicationBuilder().token("7458927374:AAFsh8RexxrS32gbypOZcRmX8B8auS4fekI").build()
+    app = ApplicationBuilder().token("ToKEN").build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
