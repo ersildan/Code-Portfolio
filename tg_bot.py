@@ -114,8 +114,7 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif "Сколько" in text:
         await update.message.reply_text(
             "Мальчику исполнилось 31 годик 🎂\n"
-            "Смело закидываем ему 31 рубль 🤑\nна карту Сбербанка по номеру 89522746688\n"
-
+            "Смело закидываем ему 31 рубль 🤑\nна карту"
         )
     elif "анекдот" in text.lower():
         joke = random.choice(jokes)
