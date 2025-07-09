@@ -1,6 +1,6 @@
 '''
-Простой скрипт, чтобы вытащить все смайлики с RuTebe
-A simple script to extract all emoticons from RuTebe
+Простой скрипт, чтобы вытащить все смайлики с RuTube
+A simple script to extract all emoticons from RuTube
 
 Нужно скопировать элемент через исследование кода в браузере => wdp-comments-smileys-module__smilesContainer
 Придется переключаться через вкладки смайлов и повторять скрипт несколько раз.
