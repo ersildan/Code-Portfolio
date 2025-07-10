@@ -4,11 +4,10 @@ def new_function(n, num):
     else:
         with open('file.txt', 'w+', encoding='UTF-8') as f:
             for el in range(1, n + 1):
-                f.write(f"{el} день - баланс {num} - списалось 7 - осталось {num - 7}\n")
+                f.write(f"{el} день - баланс {num} - списалось 7 - осталось {num - 7}")
                 num -= 7
             f.seek(0)
-            txt = f.read()
-        return txt
+        return f.read()
 
 
 print(new_function(int(input()), int(input())))
