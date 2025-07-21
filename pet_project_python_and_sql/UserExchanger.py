@@ -80,6 +80,8 @@ def check_amount(amount, choice_1):
     if amount > balance:
         raise Exception (f'\033[31mНедостаточно средств\033[0m: {name_exc} = {balance}\n'
                          'Повторите попытку')
+    if amount < 0:
+        raise Exception('\033[31mОшибка\033[0m: Число не должно быть отрицательным')
 
     print(*[f"\033[93mВведите [ {key} ] для обмена на {d[key]}\033[0m"
            for key, value in d.items() if key != choice_1], sep='\n') # Выводим список доступных валют для обмена
