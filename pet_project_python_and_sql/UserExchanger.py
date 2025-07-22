@@ -68,8 +68,10 @@ def check_amount(amount, choice_1):
 
     try:
         amount = float(amount.replace(',', '.')) # Проверка числа на float()
+        if amount == 0:
+            raise Exception
     except:
-        raise Exception ('\033[31mОшибка\033[0m: Нужно вводить только цифры без букв')
+        raise Exception ('\033[31mОшибка\033[0m: Нужно вводить только цифры больше нуля')
 
     cur.execute("""SELECT * FROM users_balance;""") # Запрос в таблицу users_balance
 
@@ -89,7 +91,7 @@ def check_amount(amount, choice_1):
     choice_2 = input() # Выбор пользователя на что он будет менять свою валюту
 
     if choice_2.isdigit() is not True: # Проверка на цифры
-        raise Exception('\033[31mОшибка\033[0m: Нужно вводить только цифры без букв')
+        raise Exception('\033[31mОшибка\033[0m: Нужно вводить только положительное число без букв')
     if choice_1 == choice_2 or choice_2 not in ['1', '2', '3']: # Дополнительная проверка
         raise Exception('\033[31mОшибка\033[0m: Выбирайте, пожалуйста, из доступных вариантов')
 
