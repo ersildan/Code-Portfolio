@@ -1,26 +1,6 @@
-'''
-Простой скрипт, чтобы вытащить все смайлики с RuTube
-A simple script to extract all emoticons from RuTube
+"""Спарсил с RuTube"""
 
-Нужно скопировать элемент через исследование кода в браузере => wdp-comments-smileys-module__smilesContainer
-Придется переключаться через вкладки смайлов и повторять скрипт несколько раз.
-You need to copy the element by examining the code in the browser => wdp-comments-smileys-module__smilesContainer
-You will have to switch through the smiley tabs and repeat the script several times.
-'''
-
-txt_link_element = '...'
-new_txt = txt.replace('</span><span class="wdp-comments-smileys-module__smile">', "") # Удаляем лишние строчки текста
-
-total = 0
-for el in new_txt:
-    if total != 26:
-        print(el, end='')
-        total += 1
-    else:
-        total = 0
-        print(el + '\n')
-
-smile = '''
+smiles = '''
 😀😃😄😁😆😅🤣😂🙂🙃😉😊😇🥰😍🤩😘😗😚😙😋😛😜🤪😝🤑
 🤗🤭🤫🤔🤐🤨😐😑😶😏😒🙄😬🤥😌😔😪🤤😴😷🤒🤕🤢🤮🤧🥵
 🥶🥴😵🤯🤠🥳😎🤓🧐😕😟🙁😮😯😲😳🥺😦😧😨😰😥😢😭😱😖
