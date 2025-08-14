@@ -1,0 +1,1 @@
+print(['Bad', 'Good'][len(n:=input()) == 10 or len(n) == 12])
