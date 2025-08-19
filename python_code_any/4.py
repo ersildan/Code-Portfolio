@@ -1,0 +1,1 @@
+print(sum(el for el in range(1, len(input().split()) + 1)))
