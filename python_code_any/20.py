@@ -1,6 +1,6 @@
 s = input()
 for letter in s:
-    if '.':
+    if letter == '.':
         print(letter + '.', end='')
     else:
         print(letter, end='')
