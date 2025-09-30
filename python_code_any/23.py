@@ -13,9 +13,4 @@ while n > 0:
     if n <= 5 and n != 0:
         print(f"5 - {n // 5}")
         n = n - (n // 5) * 5
-
-x = 10
-
-y = 20 
-
-print(x is y)
+        
