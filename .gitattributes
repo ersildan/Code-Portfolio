@@ -1,2 +1,9 @@
 *.sql linguist-language=SQL
+*.py linguist-language=Python
+*.csv linguist-language=CSV
+
+*.txt linguist-documentation
+*.md linguist-documentation
+README linguist-documentation
+
 * linguist-detectable
