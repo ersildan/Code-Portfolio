@@ -104,7 +104,7 @@ def check_amount(amount, choice_1):
     b2 = new_data[int(choice_2)] # Баланс валюты, которую пополнили
 
     print(f"Баланс {d[choice_1]} = {round(b1, 2)}\nБаланс {d[choice_2]} = {round(b2, 2)}")
-    print('⭐   Программа успешно завершена   ⭐')
+    print('Программа успешно завершена.')
 
 def func():
     """Выбираем валюту для обмена"""
